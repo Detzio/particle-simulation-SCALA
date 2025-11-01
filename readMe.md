@@ -3,16 +3,16 @@
 Simulation de particules en Scala avec ScalaFX.
 
 ## Aperçu
-La vidéo ci‑dessous montre la *first version* du projet. Placez le fichier `first version.mp4` à la racine du dépôt pour qu'il s'affiche.
+La vidéo ci‑dessous montre la *first version* du projet.
 
 <video controls width="720">
-  <source src="./first%20version.mp4" type="video/mp4">
+  <source src="./firstVersion.mp4" type="video/mp4">
   Votre navigateur ne supporte pas la balise vidéo.
 </video>
 
 Si la vidéo ne s'affiche pas directement dans le rendu (GitHub peut restreindre la lecture intégrée), vous pouvez la télécharger ou l'ouvrir via ce lien :
 
-[Ouvrir / Télécharger la vidéo "first version.mp4"](./first%20version.mp4)
+[Ouvrir / Télécharger la vidéo "first version.mp4"](./firstVersion.mp4)
 
 ## Prérequis
 - Java 11 ou supérieur
