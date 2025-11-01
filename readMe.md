@@ -4,7 +4,7 @@ Simulation de particules en Scala avec ScalaFX.
 
 ## 📹 Démonstration
 
-https://github.com/Detzio/particle-simulation-SCALA/assets/firstVersion.mp4
+https://github.com/Detzio/particle-simulation-SCALA/firstVersion.mp4
 
 ## 🚀 Lancer le projet
 
