@@ -4,7 +4,7 @@ Simulation de particules en Scala avec ScalaFX.
 
 ## 📹 Démonstration
 
-[firstVersion.mp3](https://github.com/user-attachments/files/23285927/firstVersion.mp3)
+[![Watch the video](./firstVersion.mp4)]
 
 ## 🚀 Lancer le projet
 
