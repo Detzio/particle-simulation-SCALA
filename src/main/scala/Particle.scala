@@ -21,8 +21,8 @@ case class Particle(x: Int, y: Int, dir: Direction = Particle.randomDirection(),
     fill = color
   }
 
-  def nextPositionFor(d: Direction, maxWidth: Int, maxHeight: Int, step: Int = 4): (Int, Int) = {
-    val (dx, dy) = d match {
+  def nextPositionFor(direction: Direction, screenWidth: Int, screenHeight: Int, step: Int = 4): (Int, Int) = {
+    val (deltaX, deltaY) = direction match {
       case Direction.NORTH      => (0, -step)
       case Direction.SOUTH      => (0, step)
       case Direction.EAST       => (step, 0)
@@ -33,23 +33,23 @@ case class Particle(x: Int, y: Int, dir: Direction = Particle.randomDirection(),
       case Direction.SOUTHWEST  => (-step, step)
     }
 
-    val nextXRaw = x + dx
-    val nextYRaw = y + dy
+    val nextX = x + deltaX
+    val nextY = y + deltaY
 
     val wrappedX =
-      if (nextXRaw < 0) maxWidth
-      else if (nextXRaw > maxWidth) 0
-      else nextXRaw
+      if (nextX < 0) screenWidth
+      else if (nextX > screenWidth) 0
+      else nextX
 
     val wrappedY =
-      if (nextYRaw < 0) maxHeight
-      else if (nextYRaw > maxHeight) 0
-      else nextYRaw
+      if (nextY < 0) screenHeight
+      else if (nextY > screenHeight) 0
+      else nextY
 
     (wrappedX, wrappedY)
   }
 
-  def withPositionAndDir(nx: Int, ny: Int, nd: Direction): Particle =
-    copy(x = nx, y = ny, dir = nd)
+  def withPositionAndDir(newX: Int, newY: Int, newDirection: Direction): Particle =
+    copy(x = newX, y = newY, dir = newDirection)
 
 }

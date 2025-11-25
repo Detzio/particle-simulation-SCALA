@@ -39,40 +39,37 @@ object Main extends JFXApp3 {
     }
 
     def resolveCollisionsAndMove(current: Seq[Particle]): IndexedSeq[Particle] = {
-      val occupied = scala.collection.mutable.Set.empty[(Int, Int)]
+      val collisionRadius = 6.5
+      val nextPositions = current.map(p => p -> p.nextPositionFor(p.dir, screenWidth, screenHeight))
+      val result = scala.collection.mutable.Map.empty[Particle, Particle]
 
-      val nextParticles: Seq[Particle] = current.map { p =>
-        val preferred = p.nextPositionFor(p.dir, screenWidth, screenHeight)
-
-        if (!occupied.contains(preferred)) {
-          occupied.add(preferred)
-          p.withPositionAndDir(preferred._1, preferred._2, p.dir)
-        } else {
-          val shuffled = Random.shuffle(Direction.values.toList)
-          val available = shuffled.find { d =>
-            val np = p.nextPositionFor(d, screenWidth, screenHeight)
-            !occupied.contains(np)
+      for ((particle, newPos) <- nextPositions) {
+        if (!result.contains(particle)) {
+          val willCollide = current.exists { other =>
+            other != particle &&
+            !result.contains(other) &&
+            distance(newPos._1, newPos._2, other.x, other.y) <= collisionRadius
           }
 
-          available match {
-            case Some(d) =>
-              val np = p.nextPositionFor(d, screenWidth, screenHeight)
-              occupied.add(np)
-              p.withPositionAndDir(np._1, np._2, d)
-            case None =>
-              val newDir = shuffled.head
-              p.withPositionAndDir(p.x, p.y, newDir)
+          if (willCollide) {
+            result(particle) = particle.withPositionAndDir(particle.x, particle.y, particle.dir.reverse)
+          } else {
+            result(particle) = particle.withPositionAndDir(newPos._1, newPos._2, particle.dir)
           }
         }
       }
 
-      nextParticles.toIndexedSeq
+      current.map(result.apply).toIndexedSeq
+    }
+
+    def distance(x1: Int, y1: Int, x2: Int, y2: Int): Double = {
+      Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2))
     }
 
     val timeline = new Timeline {
       keyFrames = List(
         KeyFrame(
-          time = Duration(25),
+          time = Duration(50),
           onFinished = _ => {
             particles.value = resolveCollisionsAndMove(particles.value)
             sceneRef.content = particles.value.map(_.draw)
