@@ -1,10 +1,7 @@
 # Particle Simulation
 
-Simulation de particules en Scala avec ScalaFX.
+Particle simulation in Scala with ScalaFX.
 
 ## 📹 Démonstration
 
-![Demo Particle Simulation](./demo.gif)
-
-**Prérequis** : Java 11+ et sbt
-
+https://github.com/user-attachments/assets/18f610c3-fd2d-4ae6-b8ac-cc8e51de8192
